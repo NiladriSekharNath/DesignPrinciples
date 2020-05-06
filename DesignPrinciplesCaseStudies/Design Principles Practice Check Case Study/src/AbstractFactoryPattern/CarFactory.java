@@ -1,14 +1,26 @@
 package AbstractFactoryPattern;
 
 public class CarFactory {
-
-	public static Car buildCar(CarType carType, Location location) {
-		if (carType.equals(CarType.MINI)) {
-			return new MiniCar(location);
-		} else if (carType.equals(CarType.MICRO)) {
-			return new MicroCar(location);
-		} else
-			return new LuxuryCar(location);
+	private CarFactory() {
+		
 	}
+	public static Car buildCar(CarType carType,Location location) {
+		Car car=null;
+		
+		switch(location) {
+			case USA:
+				car=USACarFactory.buildCar(carType);
+				break;
+			case INDIA:
+				car=INDIACarFactory.buildCar(carType);
+				break;
+			default:
+				car=DefaultCarFactory.buildCar(carType);
+				break;
+		
+		}
+		return car;
+	}
+	
 
 }
