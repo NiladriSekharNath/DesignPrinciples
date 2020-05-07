@@ -24,7 +24,8 @@ public class NotificationService implements INotificationService {
 	@Override
 	public void notifySubscriber() {
 		for (INotificationObserver observer : list)
-			observer.onTicketsBooked();
+			if (observer.getNoOfTickets() > 100)
+				observer.notification();
 	}
 
 }
